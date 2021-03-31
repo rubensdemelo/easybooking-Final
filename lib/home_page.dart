@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                 controller: _nameTextController,
                 decoration: InputDecoration(labelText: 'Name'),
                 validator: (name) {
-                  if (name!.length < 3) {
+                  if (name!.trim().length < 3) {
                     return 'Invalid name';
                   }
                 },
