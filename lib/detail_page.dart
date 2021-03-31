@@ -104,7 +104,6 @@ class DetailPage extends StatelessWidget {
               spacing: 8,
               children: selectedItems
                   .map((menuItem) => InputChip(
-                        key: Key(menuItem.label.toString()),
                         label: Text(menuItem.label),
                         selected: menuItem.selected,
                         onSelected: null,
