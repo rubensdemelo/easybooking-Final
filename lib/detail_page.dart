@@ -81,7 +81,7 @@ class DetailPage extends StatelessWidget {
           ),
           ListTile(
             title: Text('Open air'),
-            trailing: Checkbox(
+            trailing: Switch(
               value: booking.openAir,
               onChanged: null,
             ),
