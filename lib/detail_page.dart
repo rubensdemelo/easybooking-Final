@@ -35,7 +35,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 import 'package:easybooking/booking.dart';
-import 'package:easybooking/item_menu.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
@@ -45,10 +44,6 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var selectedItems = <ItemMenu>[];
-    booking.listItemMenu.forEach((itemMenu) {
-      if (itemMenu.selected) selectedItems.add(itemMenu);
-    });
     return Scaffold(
       appBar: AppBar(
         title: Text('Details'),
@@ -102,7 +97,7 @@ class DetailPage extends StatelessWidget {
             subtitle: Wrap(
               runSpacing: 2,
               spacing: 8,
-              children: selectedItems
+              children: booking.listItemMenu
                   .map((menuItem) => InputChip(
                         label: Text(menuItem.label),
                         selected: menuItem.selected,

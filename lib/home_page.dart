@@ -105,7 +105,9 @@ class _HomePageState extends State<HomePage> {
             children: [
               TextFormField(
                 controller: _nameTextController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                ),
                 validator: (name) {
                   if (name!.trim().length < 3) {
                     return 'Invalid name';
@@ -156,7 +158,6 @@ class _HomePageState extends State<HomePage> {
                         _day = selectedDay;
                         _dayTextController.text =
                             DateFormat.yMd().format(selectedDay);
-                        // _dayTextController.text = _day!.toString();
                       }
                     },
                   )),
@@ -178,8 +179,6 @@ class _HomePageState extends State<HomePage> {
                           selectedTime.hour,
                           selectedTime.minute,
                         ));
-                        // _timeTextController.text =
-                        //     _time!.format(context).toString();
                       }
                     },
                   )),
