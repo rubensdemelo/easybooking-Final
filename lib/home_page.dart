@@ -34,14 +34,17 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-import 'package:easybooking/booking.dart';
-import 'package:easybooking/detail_page.dart';
-import 'package:easybooking/item_menu.dart';
+import 'booking.dart';
+import 'detail_page.dart';
+import 'item_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -54,8 +57,6 @@ class _HomePageState extends State<HomePage> {
   final _timeTextController = TextEditingController();
   final _dayTextController = TextEditingController();
 
-  DateTime? _day;
-  TimeOfDay? _time;
   double _guests = 1;
   bool _openAir = false;
   bool _special = false;
@@ -79,21 +80,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   bool validateMenuList() {
-    bool isValid = false;
-    _menuList.forEach((item) {
+    for (final item in _menuList) {
       if (item.selected == true) {
-        isValid = true;
+        return true;
       }
-    });
-
-    return isValid;
+    }
+    return false;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('EasyBooking'),
+        title: const Text('EasyBooking'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -101,15 +100,15 @@ class _HomePageState extends State<HomePage> {
           key: _formKey,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: ListView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             children: [
               TextFormField(
                 controller: _nameTextController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Name',
                 ),
                 validator: (name) {
-                  if (name!.trim().length < 3) {
+                  if ((name?.trim().length ?? 0) < 3) {
                     return 'Invalid name';
                   }
                 },
@@ -120,13 +119,13 @@ class _HomePageState extends State<HomePage> {
               TextFormField(
                 controller: _emailTextController,
                 validator: (mail) {
-                  if (!mail!.contains('@')) {
+                  if ((mail?.contains('@')) == false) {
                     return 'Invalid e-mail';
                   }
                   return null;
                 },
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(labelText: 'E-mail'),
+                decoration: const InputDecoration(labelText: 'E-mail'),
               ),
               TextFormField(
                 controller: _phoneTextController,
@@ -136,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                   }
                   return null;
                 },
-                decoration: InputDecoration(labelText: 'Phone'),
+                decoration: const InputDecoration(labelText: 'Phone'),
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
@@ -147,30 +146,29 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                       child: TextFormField(
                     controller: _dayTextController,
-                    decoration: InputDecoration(labelText: 'Day'),
+                    decoration: const InputDecoration(labelText: 'Day'),
                     onTap: () async {
                       final selectedDay = await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
                           firstDate: DateTime.now(),
-                          lastDate: DateTime.now().add(Duration(days: 7)));
+                          lastDate:
+                              DateTime.now().add(const Duration(days: 7)));
                       if (selectedDay != null) {
-                        _day = selectedDay;
                         _dayTextController.text =
                             DateFormat.yMd().format(selectedDay);
                       }
                     },
                   )),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                       child: TextFormField(
                     controller: _timeTextController,
-                    decoration: InputDecoration(labelText: 'Time'),
+                    decoration: const InputDecoration(labelText: 'Time'),
                     onTap: () async {
                       final selectedTime = await showTimePicker(
                           context: context, initialTime: TimeOfDay.now());
                       if (selectedTime != null) {
-                        _time = selectedTime;
                         _timeTextController.text =
                             DateFormat.Hm().format(DateTime(
                           DateTime.now().year,
@@ -187,13 +185,13 @@ class _HomePageState extends State<HomePage> {
               Row(
                 children: [
                   Text('Guests: ${_guests.ceil()}'),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: Slider(
                       value: _guests,
                       min: 1,
                       max: 8,
-                      onChanged: (double guestNumber) {
+                      onChanged: (guestNumber) {
                         setState(() {
                           _guests = guestNumber;
                         });
@@ -203,10 +201,10 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               SwitchListTile(
-                title: Text('Open air'),
-                contentPadding: EdgeInsets.all(0),
+                title: const Text('Open Air'),
+                contentPadding: const EdgeInsets.all(0),
                 value: _openAir,
-                onChanged: (bool openAirOption) {
+                onChanged: (openAirOption) {
                   setState(() {
                     _openAir = openAirOption;
                   });
@@ -214,10 +212,10 @@ class _HomePageState extends State<HomePage> {
               ),
               Row(),
               CheckboxListTile(
-                title: Text('Special Occasion'),
-                contentPadding: EdgeInsets.all(0),
+                title: const Text('Special Occasion'),
+                contentPadding: const EdgeInsets.all(0),
                 value: _special,
-                onChanged: (bool? specialOccasionOption) {
+                onChanged: (specialOccasionOption) {
                   setState(() {
                     _special = specialOccasionOption!;
                   });
@@ -239,8 +237,8 @@ class _HomePageState extends State<HomePage> {
                         ))
                     .toList(),
               ),
-              Divider(),
-              Text('Menu'),
+              const Divider(),
+              const Text('Menu'),
               Wrap(
                 runSpacing: 2,
                 spacing: 8,
@@ -257,32 +255,32 @@ class _HomePageState extends State<HomePage> {
                         ))
                     .toList(),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               ElevatedButton.icon(
                   onPressed: () {
                     if (_formKey.currentState!.validate() &&
                         validateDateAndTime() &&
                         validateMenuList()) {
                       final booking = Booking(
-                          _nameTextController.text,
-                          _emailTextController.text,
-                          _phoneTextController.text,
-                          _dayTextController.text,
-                          _timeTextController.text,
-                          _guests.ceil().toString(),
-                          _openAir,
-                          _paymentChoice,
-                          _special,
-                          _menuList);
+                          name: _nameTextController.text,
+                          email: _emailTextController.text,
+                          phone: _phoneTextController.text,
+                          day: _dayTextController.text,
+                          time: _timeTextController.text,
+                          guests: _guests.ceil().toString(),
+                          openAir: _openAir,
+                          payment: _paymentChoice,
+                          specialOccasion: _special,
+                          listItemMenu: _menuList);
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => DetailPage(booking)));
+                          builder: (context) => DetailPage(booking: booking)));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Invalid data')));
+                          const SnackBar(content: Text('Invalid data')));
                     }
                   },
-                  icon: Icon(Icons.check),
-                  label: Text('Confirm')),
+                  icon: const Icon(Icons.check),
+                  label: const Text('Confirm')),
             ],
           ),
         ),

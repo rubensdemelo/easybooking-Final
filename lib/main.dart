@@ -34,18 +34,21 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-import 'package:easybooking/home_page.dart';
+import 'home_page.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'EasyBooking',
-      theme: ThemeData(primarySwatch: Colors.amber),
-      home: HomePage(),
+      theme: ThemeData(primarySwatch: Colors.indigo),
+      home: const HomePage(),
     );
   }
 }

@@ -34,55 +34,58 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-import 'package:easybooking/booking.dart';
 import 'package:flutter/material.dart';
+
+import 'booking.dart';
 
 class DetailPage extends StatelessWidget {
   final Booking booking;
-
-  const DetailPage(this.booking);
+  const DetailPage({
+    Key? key,
+    required this.booking,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Details'),
+        title: const Text('Details'),
       ),
       body: ListView(
         children: [
           ListTile(
             title: Text(booking.name),
-            subtitle: Text('Name'),
+            subtitle: const Text('Name'),
           ),
           ListTile(
             title: Text(booking.email),
-            subtitle: Text('E-mail'),
+            subtitle: const Text('E-mail'),
           ),
           ListTile(
             title: Text(booking.phone),
-            subtitle: Text('Phone'),
+            subtitle: const Text('Phone'),
           ),
           ListTile(
             title: Text(booking.day),
-            subtitle: Text('Day'),
+            subtitle: const Text('Day'),
           ),
           ListTile(
             title: Text(booking.time),
-            subtitle: Text('Time'),
+            subtitle: const Text('Time'),
           ),
           ListTile(
             title: Text(booking.guests),
-            subtitle: Text('Guests'),
+            subtitle: const Text('Guests'),
           ),
           ListTile(
-            title: Text('Open air'),
+            title: const Text('Open Air'),
             trailing: Switch(
               value: booking.openAir,
               onChanged: null,
             ),
           ),
           ListTile(
-            title: Text('Special Occasion'),
+            title: const Text('Special Occasion'),
             trailing: Checkbox(
               value: booking.specialOccasion,
               onChanged: null,
@@ -90,10 +93,10 @@ class DetailPage extends StatelessWidget {
           ),
           ListTile(
             title: Text(booking.payment),
-            subtitle: Text('Payment'),
+            subtitle: const Text('Payment'),
           ),
           ListTile(
-            title: Text('Menu'),
+            title: const Text('Menu'),
             subtitle: Wrap(
               runSpacing: 2,
               spacing: 8,

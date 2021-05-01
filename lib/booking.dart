@@ -34,21 +34,30 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-import 'package:easybooking/item_menu.dart';
+import 'item_menu.dart';
 
 class Booking {
-  String name;
-  String email;
-  String phone;
-  String day;
-  String time;
-  String guests;
-  bool openAir;
-  String payment;
-  bool specialOccasion;
+  final String name;
+  final String email;
+  final String phone;
+  final String day;
+  final String time;
+  final String guests;
+  final bool openAir;
+  final String payment;
+  final bool specialOccasion;
 
-  List<ItemMenu> listItemMenu;
+  final List<ItemMenu> listItemMenu;
 
-  Booking(this.name, this.email, this.phone, this.day, this.time, this.guests,
-      this.openAir, this.payment, this.specialOccasion, this.listItemMenu);
+  const Booking(
+      {required this.name,
+      required this.email,
+      required this.phone,
+      required this.day,
+      required this.time,
+      required this.guests,
+      required this.openAir,
+      required this.payment,
+      required this.specialOccasion,
+      required this.listItemMenu});
 }
